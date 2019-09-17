@@ -26,7 +26,7 @@ function App() {
               <tr key={index}>
                 <td>{todo.date}</td>
                 <td>{todo.desc}</td>
-                </tr>)
+              </tr>)
           }
         </tbody></table>
       </form>
