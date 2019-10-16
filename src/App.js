@@ -1,5 +1,6 @@
 import React, { useState }  from 'react';
 import './App.css';
+import Button from '@material-ui/core/Button';
 
 function App() {
   const [todo, setTodo] = useState({desc: '', date: ''});
@@ -16,20 +17,18 @@ function App() {
 
   return (
     <div className="App">
-      <form onSubmit={addTodo}>
-        <input type="date" name="date" value={todo.date} onChange={inputChanged}/>
-        <input type="text" name="desc" value={todo.desc} onChange={inputChanged}/>
-        <input type="submit" value="Add" />
-        <table><tbody>
-          {
-            todos.map((todo, index) => 
-              <tr key={index}>
-                <td>{todo.date}</td>
-                <td>{todo.desc}</td>
-              </tr>)
-          }
-        </tbody></table>
-      </form>
+      <input type="date" name="date" value={todo.date} onChange={inputChanged}/>
+      <input type="text" name="desc" value={todo.desc} onChange={inputChanged}/>
+      <button onClick={addTodo}>Add</button>
+      <table><tbody>
+      {
+      todos.map((todo, index) => 
+        <tr key={index}>
+          <td>{todo.date}</td>
+          <td>{todo.desc}</td>
+        </tr>)
+      }
+      </tbody></table>
     </div>
   );
 }
