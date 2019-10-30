@@ -1,6 +1,5 @@
 import React, { useState }  from 'react';
 import './App.css';
-import Button from '@material-ui/core/Button';
 
 function App() {
   const [todo, setTodo] = useState({desc: '', date: ''});
