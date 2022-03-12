@@ -1,33 +1,41 @@
-import React, { useState }  from 'react';
+import React, { useState }  from 'react'
+import { AgGridReact } from 'ag-grid-react';
+
 import './App.css';
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-material.css';
 
 function App() {
-  const [todo, setTodo] = useState({desc: '', date: ''});
+  const [todo, setTodo] = useState({desc: '', date: '', priority: ''});
   const [todos, setTodos] = useState([]);
 
   const addTodo = (event) => {
-    event.preventDefault();
     setTodos([...todos, todo]);
+    setTodo({desc: '', date: '', priority: ''});
   }
 
   const inputChanged = (event) => {
     setTodo({...todo, [event.target.name]: event.target.value});
   } 
 
+  const columns = [
+    { field: 'desc', sortable: true, filter: true },
+    { field: 'date', sortable: true, filter: true },
+    { field: 'priority', sortable: true, filter: true },
+  ]
+
   return (
     <div className="App">
-      <input type="date" name="date" value={todo.date} onChange={inputChanged}/>
-      <input type="text" name="desc" value={todo.desc} onChange={inputChanged}/>
+      <input name="desc" value={todo.desc} onChange={inputChanged}/>
+      <input name="date" value={todo.date} onChange={inputChanged}/>
+      <input name="priority" value={todo.priority} onChange={inputChanged}/>
       <button onClick={addTodo}>Add</button>
-      <table><tbody>
-      {
-      todos.map((todo, index) => 
-        <tr key={index}>
-          <td>{todo.date}</td>
-          <td>{todo.desc}</td>
-        </tr>)
-      }
-      </tbody></table>
+      <div className="ag-theme-material" style={{height: 400, width: 600, margin: 'auto'}}>
+        <AgGridReact
+          rowData={todos}
+          columnDefs={columns}>
+        </AgGridReact>
+      </div>
     </div>
   );
 }
